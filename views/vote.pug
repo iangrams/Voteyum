@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .container
+    if (error)
+      h1.error #{error}
+    if (user)
+      each val in contests
+        h2= val.title
+        p= val.region
+        p= val.instructions
+        p= val.description
+        p= val.options
+    else
+      h1 Please login or register to continue

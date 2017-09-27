@@ -27,7 +27,7 @@ function addContestToList(title, reg, type, instruct, desc, opts){
 				Contest.findByIdAndUpdate(
 				    contest._id,
 				    {$push: {"options": optionList}},
-				    {safe: true, upsert: true},
+				    {safe: true, upsert: true, new: true},
 				    function(err, updatedContest) {
 				        contestList.push(updatedContest);
 				    }
@@ -91,10 +91,9 @@ module.exports = function populate(){
 	    	Ballot.findByIdAndUpdate(
 				    ballot._id,
 				    {$push: {"contests": contestList}},
-				    {safe: true, upsert: true},
+				    {safe: true, upsert: true, new: true},
 				    function(err, model) {
-				    	console.log(contestList);
-				        console.log(err);
+				        console.log(err, model);
 				    }
 			);
 	    }

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var auth = require("../controllers/AuthController.js");
 var ballot = require("../controllers/BallotController.js");
+var vote = require("../controllers/VoteController.js");
 
 // restrict index for logged in user only
 router.get('/', auth.home);
@@ -24,7 +25,10 @@ router.get('/logout', auth.logout);
 //route to ballot home
 router.get('/ballot', ballot.home);
 
-/* TODO: create UI for building ballots
+//display contests for a region
+router.get('/vote/:region', vote.displayContests);
+
+//TODO: create UI for building ballots
 //route to create new ballot
 router.get('/newballot', ballot.createBallot);
 
@@ -34,5 +38,5 @@ router.post('/newballot', ballot.doCreateBallot);
 router.get('/ballot/:ballotid', ballot.createContest);
 
 router.post('/newcontest', ballot.doCreateContest);
-*/
+
 module.exports = router;
