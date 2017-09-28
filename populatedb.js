@@ -26,7 +26,7 @@ function addContestToList(title, reg, type, instruct, desc, opts){
 			}else{
 				Contest.findByIdAndUpdate(
 				    contest._id,
-				    {$push: {"options": optionList}},
+				    {$push: {"options": opts}},
 				    {safe: true, upsert: true, new: true},
 				    function(err, updatedContest) {
 				        contestList.push(updatedContest);
@@ -54,7 +54,8 @@ module.exports = function populate(){
 					"Rank candidates in order of choice. Mark your favorite candidate as first choice and then indicate your "+
 					"second and additional back-up choices in order of choice. You may rank as many candiddates as you want.",
 					optionList);
-	optionList = [];
+	optionList.length = 0;
+
 
 	//Second issue
 	addOptionToList("Yes (If you wish the offcial to remain in office)", 1, 0);
@@ -63,7 +64,7 @@ module.exports = function populate(){
 	addContestToList("For Chief Dairy Queen:", "Federal and State", 1, "Unexpired Term (Choose One)", 
 					"Shall Justice Mint C. Chip of the Supreme Court of the State of Ice Cream be retained in office for another term?",
 					optionList);
-	optionList = [];
+	optionList.length = 0;
 
 	//Third issue
 	addOptionToList("P. Nut Butter (Republican)", 2, 0);
@@ -71,7 +72,7 @@ module.exports = function populate(){
 	addOptionToList("Marsh Mallow (Democrat)", 2, 0);
 
 	addContestToList("For State Rep. District M&M:", "Federal and State", 2, "Choose Two", "", optionList);
-	optionList = [];
+	optionList.length = 0;
 
 	//Fourth issue
 	addOptionToList("Yes on CI-116 (For Vanilla)", 1, 0);
@@ -82,7 +83,7 @@ module.exports = function populate(){
 					"officially enumerate in written legislative text in perpetuity which flavor has favor - namely Vanilla is "+
 					"better, unequivocally, than Chocolate",
 					optionList);
-	optionList = [];
+	optionList.length = 0;
 
 	Ballot.create(new Ballot({title: "Voteyum 2017"}), function(err, ballot){
 	    if(err){

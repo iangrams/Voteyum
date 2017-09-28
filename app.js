@@ -15,7 +15,7 @@ mongoose.connect('mongodb://localhost/node-auth')
   .catch((err) => console.error(err));
 
 //after running once, keep this commented out to prevent duplicates
-//popdb();
+popdb();
 
 var index = require('./routes/index');
 var users = require('./routes/users');
